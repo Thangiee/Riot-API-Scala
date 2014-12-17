@@ -19,5 +19,5 @@ case class Team
  thirdLastJoinDate: Long)
 
 object Team {
-  implicit val teamFmt = Json.format[Team]
+  implicit val teamFmt = Json.reads[Team]
 }

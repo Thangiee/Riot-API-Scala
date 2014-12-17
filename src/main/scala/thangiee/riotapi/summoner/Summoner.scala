@@ -10,5 +10,5 @@ case class Summoner
  summonerLevel: Long)
 
 object Summoner {
-  implicit val summonerFmt = Json.format[Summoner]
+  implicit val summonerFmt = Json.reads[Summoner]
 }

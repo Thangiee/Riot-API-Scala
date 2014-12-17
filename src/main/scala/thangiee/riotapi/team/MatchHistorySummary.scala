@@ -16,5 +16,5 @@ case class MatchHistorySummary
  win: Boolean)
 
 object MatchHistorySummary {
-  implicit val matchHistorySummaryFmt = Json.format[MatchHistorySummary]
+  implicit val matchHistorySummaryFmt = Json.reads[MatchHistorySummary]
 }
