@@ -44,9 +44,9 @@ object RiotApi {
     jsonToMap[Long, List[Team]](ids)
   }
 
-  def teamByTeamIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Map[Long, Team] = {
+  def teamByTeamIds(ids: List[String], reg: String = reg_)(implicit caller: ApiCaller): Map[String, Team] = {
     implicit val url = s"${baseUrl(reg)}/$teamVer/team/${ids.mkString(",")}?api_key="
-    jsonToMap[Long, Team](ids)
+    jsonToMap[String, Team](ids)
   }
 
   private def jsonToMap[A, B: Reads](keys: List[A])(implicit caller: ApiCaller, url: String): Map[A, B] = {
