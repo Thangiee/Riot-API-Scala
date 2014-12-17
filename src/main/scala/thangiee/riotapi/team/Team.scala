@@ -4,7 +4,7 @@ import play.api.libs.json._
 
 case class Team
 (createDate: Long,
- fillId: String,
+ fullId: String,
  lastGameDate: Long,
  lastJoinDate: Long,
  lastJoinedRankedTeamQueueDate: Long,
