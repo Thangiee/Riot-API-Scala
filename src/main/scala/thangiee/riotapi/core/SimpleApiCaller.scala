@@ -1,6 +1,6 @@
-package thangiee.riotapi.utils
+package thangiee.riotapi.core
 
-import thangiee.riotapi.utils.RiotException._
+import thangiee.riotapi.core.RiotException._
 
 import scala.util.{Failure, Success, Try}
 import scalaj.http.Http

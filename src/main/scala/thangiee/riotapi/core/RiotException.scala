@@ -1,4 +1,4 @@
-package thangiee.riotapi.utils
+package thangiee.riotapi.core
 
 case class RiotException(msg: String, errType: RiotException.Value) extends Exception(msg)
 

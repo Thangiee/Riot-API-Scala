@@ -1,3 +1,3 @@
-package thangiee.riotapi.utils
+package thangiee.riotapi.core
 
 case class ApiKey(key: String)

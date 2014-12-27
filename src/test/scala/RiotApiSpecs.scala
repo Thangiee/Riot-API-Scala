@@ -1,8 +1,7 @@
 import org.specs2.mock._
 import org.specs2.mutable._
 import org.specs2.specification.Scope
-import thangiee.riotapi.RiotApi
-import thangiee.riotapi.utils.{ApiKey, ApiCaller}
+import thangiee.riotapi.core.{ApiKey, ApiCaller, RiotApi}
 
 class RiotApiSpecs extends Specification with Mockito {
 

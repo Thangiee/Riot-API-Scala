@@ -1,4 +1,4 @@
-package thangiee.riotapi
+package thangiee.riotapi.core
 
 import play.api.libs.json._
 import thangiee.riotapi.game.RecentGames
@@ -7,7 +7,6 @@ import thangiee.riotapi.static_data.{Champion, SummonerSpell}
 import thangiee.riotapi.stats.{PlayerStatsSummaryList, RankedStats}
 import thangiee.riotapi.summoner.{MasteryPages, RunePages, Summoner}
 import thangiee.riotapi.team.Team
-import thangiee.riotapi.utils._
 
 object RiotApi {
   private implicit var key_ = ApiKey("")
