@@ -1,5 +1,5 @@
 package thangiee.riotapi.utils
 
 trait ApiCaller {
-  def call(url: String): Option[String]
+  def call(url: String)(implicit apiKey: ApiKey): Either[RiotException, String]
 }
