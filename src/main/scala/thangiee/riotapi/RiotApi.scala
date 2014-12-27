@@ -2,7 +2,9 @@ package thangiee.riotapi
 
 import play.api.libs.json._
 import thangiee.riotapi.game.RecentGames
+import thangiee.riotapi.league.League
 import thangiee.riotapi.static_data.{Champion, SummonerSpell}
+import thangiee.riotapi.stats.{PlayerStatsSummaryList, RankedStats}
 import thangiee.riotapi.summoner.{MasteryPages, RunePages, Summoner}
 import thangiee.riotapi.team.Team
 import thangiee.riotapi.utils._
@@ -14,6 +16,8 @@ object RiotApi {
   val summVer = "v1.4"
   val teamVer = "v2.4"
   val staticDataVer = "v1.2"
+  val statsVer = "v1.3"
+  val leagueVer = "v2.5"
 
   def region(region: String) = reg_ = region.toLowerCase
 
@@ -28,6 +32,33 @@ object RiotApi {
   def recentGamesById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, RecentGames] = {
     implicit val url = s"${baseUrl(reg)}/$gameVer/game/by-summoner/$id/recent?api_key="
     jsonTo[RecentGames]
+  }
+
+  // =====================
+  //    league api calls
+  // =====================
+
+  def leagueEntryByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Map[Long, List[League]]] = {
+    implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-summoner/${ids.mkString(",")}/entry?api_key="
+    jsonToMap[Long, List[League]](ids)
+  }
+
+  def leagueEntryById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, List[League]] = {
+    leagueEntryByIds(List(id)).right.map(_.getOrElse(id, Nil))
+  }
+
+  // =====================
+  //    Stats api calls
+  // =====================
+
+  def rankedStatsById(id: Long, season: Int, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, RankedStats] = {
+    implicit val url = s"${baseUrl(reg)}/$statsVer/stats/by-summoner/$id/ranked?season=SEASON$season&api_key="
+    jsonTo[RankedStats]
+  }
+
+  def summaryStatsById(id: Long, season: Int, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, PlayerStatsSummaryList] = {
+    implicit val url = s"${baseUrl(reg)}/$statsVer/stats/by-summoner/$id/summary?season=SEASON$season&api_key="
+    jsonTo[PlayerStatsSummaryList]
   }
 
   // =====================
