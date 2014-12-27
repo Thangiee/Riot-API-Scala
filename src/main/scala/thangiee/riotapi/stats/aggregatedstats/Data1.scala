@@ -3,19 +3,19 @@ package thangiee.riotapi.stats.aggregatedstats
 import play.api.libs.json._
 
 case class Data1
-(botGamesPlayed: Int,
- killingSpree: Int,
- maxChampionsKilled: Int,
- maxLargestCriticalStrike: Int,
- maxLargestKillingSpree: Int,
+(botGamesPlayed: Option[Int],
+ killingSpree: Option[Int],
+ maxChampionsKilled: Option[Int],
+ maxLargestCriticalStrike: Option[Int],
+ maxLargestKillingSpree: Option[Int],
  maxNumDeaths: Option[Int],
- maxTimePlayed: Int,
- maxTimeSpentLiving: Int,
- mostChampionKillsPerSession: Int,
- mostSpellsCast: Int,
- normalGamesPlayed: Int,
- rankedPremadeGamesPlayed: Int,
- rankedSoloGamesPlayed: Int
+ maxTimePlayed: Option[Int],
+ maxTimeSpentLiving: Option[Int],
+ mostChampionKillsPerSession: Option[Int],
+ mostSpellsCast: Option[Int],
+ normalGamesPlayed: Option[Int],
+ rankedPremadeGamesPlayed: Option[Int],
+ rankedSoloGamesPlayed: Option[Int]
   )
 
 object Data1 {

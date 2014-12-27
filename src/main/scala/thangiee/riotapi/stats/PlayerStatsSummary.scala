@@ -5,7 +5,7 @@ import thangiee.riotapi.stats.aggregatedstats.AggregatedStats
 
 case class PlayerStatsSummary
 (aggregatedStats: AggregatedStats,
- losses: Int,
+ losses: Option[Int],
  modifyDate: Long,
  playerStatSummaryType: String,
  wins: Int
