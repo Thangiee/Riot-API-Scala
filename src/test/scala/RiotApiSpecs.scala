@@ -78,7 +78,7 @@ class RiotApiSpecs extends Specification with Mockito {
   "Calling summonerNameById" should {
     "return the name of the summoner with the corresponding id" in new CustomScope {
       def json: String = "{\"25011185\":\"Thangiee\"}"
-      RiotApi.summonerNameById(25011185).right.get.get must_== "Thangiee"
+      RiotApi.summonerNameById(25011185).right.get must_== "Thangiee"
     }
   }
 

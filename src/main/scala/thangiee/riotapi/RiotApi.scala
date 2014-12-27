@@ -25,9 +25,9 @@ object RiotApi {
   //    Games api calls
   // =====================
 
-  def recentGamesBySummonerId(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Option[RecentGames]] = {
+  def recentGamesById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, RecentGames] = {
     implicit val url = s"${baseUrl(reg)}/$gameVer/game/by-summoner/$id/recent?api_key="
-    jsonToOption[Long, RecentGames](id)
+    jsonTo[RecentGames]
   }
 
   // =====================
@@ -39,8 +39,9 @@ object RiotApi {
     jsonToMap[String, Summoner](names)
   }
 
-  def summonerByName(name: String, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Option[Summoner]] = {
-    summonerByNames(List(name)).right.map(_.get(name))
+  def summonerByName(name: String, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Summoner] = {
+    implicit val url = s"${baseUrl(reg)}/$summVer/summoner/by-name/$name?api_key="
+    jsonTo[String, Summoner](name)
   }
 
   def summonerByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Map[Long, Summoner]] = {
@@ -48,8 +49,9 @@ object RiotApi {
     jsonToMap[Long, Summoner](ids)
   }
 
-  def summonerById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Option[Summoner]] = {
-    summonerByIds(List(id)).right.map(_.get(id))
+  def summonerById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Summoner] = {
+    implicit val url = s"${baseUrl(reg)}/$summVer/summoner/$id?api_key="
+    jsonTo[Long, Summoner](id)
   }
 
   def masteryPagesByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Map[Long, MasteryPages]] = {
@@ -57,9 +59,9 @@ object RiotApi {
     jsonToMap[Long, MasteryPages](ids)
   }
 
-  def summonerNameById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Option[String]] = {
+  def summonerNameById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, String] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/$id/name?api_key="
-    jsonToOption[Long, String](id)
+    jsonTo[Long, String](id)
   }
 
   def runePagesByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Map[Long, RunePages]] = {
@@ -85,14 +87,14 @@ object RiotApi {
   // Static-data api calls
   // =====================
 
-  def champStaticDataById(id: Int)(implicit caller: ApiCaller): Either[RiotException, Option[Champion]] = {
+  def champStaticDataById(id: Int)(implicit caller: ApiCaller): Either[RiotException, Champion] = {
     implicit val url = s"https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion/$id?&api_key="
-    jsonToOption[Champion]
+    jsonTo[Champion]
   }
 
-  def spellStaticDataById(id: Int)(implicit caller: ApiCaller): Either[RiotException, Option[SummonerSpell]] = {
+  def spellStaticDataById(id: Int)(implicit caller: ApiCaller): Either[RiotException, SummonerSpell] = {
     implicit val url = s"https://na.api.pvp.net/api/lol/static-data/na/$staticDataVer/summoner-spell/$id?api_key="
-    jsonToOption[SummonerSpell]
+    jsonTo[SummonerSpell]
   }
 
   private def jsonToMap[A, B: Reads](keys: List[A])(implicit caller: ApiCaller, url: String): Either[RiotException, Map[A, B]] = {
@@ -106,12 +108,12 @@ object RiotApi {
     caller.call(url).right.map(asMap)
   }
 
-  private def jsonToOption[A, B: Reads](key: A)(implicit caller: ApiCaller, url: String): Either[RiotException, Option[B]] = {
-    caller.call(url).right.map(json => (Json.parse(json) \ key.toString).asOpt[B])
+  private def jsonTo[A, B: Reads](key: A)(implicit caller: ApiCaller, url: String): Either[RiotException, B] = {
+    caller.call(url).right.map(json => { println(json); (Json.parse(json) \ key.toString).as[B] })
   }
 
-  private def jsonToOption[A: Reads]()(implicit caller: ApiCaller, url: String): Either[RiotException, Option[A]] = {
-    caller.call(url).right.map(json => Json.parse(json).asOpt[A])
+  private def jsonTo[A: Reads]()(implicit caller: ApiCaller, url: String): Either[RiotException, A] = {
+    caller.call(url).right.map(json => Json.parse(json).as[A])
   }
 }
 

@@ -23,8 +23,8 @@ case class Data2
  nodeNeutralize: Option[Int],
  nodeNeutralizeAssist: Option[Int],
  numDeaths: Option[Int],
- numItemsBought: Option[Int
-])
+ numItemsBought: Option[Int]
+  )
 
 object Data2 {
   implicit val data2Fmt = Json.format[Data2]
