@@ -2,7 +2,7 @@ package thangiee.riotapi
 
 import play.api.libs.json._
 import thangiee.riotapi.game.RecentGames
-import thangiee.riotapi.static_data.SummonerSpell
+import thangiee.riotapi.static_data.{Champion, SummonerSpell}
 import thangiee.riotapi.summoner.{MasteryPages, RunePages, Summoner}
 import thangiee.riotapi.team.Team
 import thangiee.riotapi.utils._
@@ -21,10 +21,18 @@ object RiotApi {
 
   def key(key: String) = key_ = ApiKey(key)
 
+  // =====================
+  //    Games api calls
+  // =====================
+
   def recentGamesBySummonerId(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Option[RecentGames]] = {
     implicit val url = s"${baseUrl(reg)}/$gameVer/game/by-summoner/$id/recent?api_key="
     jsonToOption[Long, RecentGames](id)
   }
+
+  // =====================
+  //  Summoner api calls
+  // =====================
 
   def summonerByNames(names: List[String], reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Map[String, Summoner]] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/by-name/${names.mkString(",")}?api_key="
@@ -59,6 +67,10 @@ object RiotApi {
     jsonToMap[Long, RunePages](ids)
   }
 
+  // =====================
+  //    Team api calls
+  // =====================
+
   def teamBySummonerIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, Map[Long, List[Team]]] = {
     implicit val url = s"${baseUrl(reg)}/$teamVer/team/by-summoner/${ids.mkString(",")}?api_key="
     jsonToMap[Long, List[Team]](ids)
@@ -73,7 +85,12 @@ object RiotApi {
   // Static-data api calls
   // =====================
 
-  def spellById(id: Int)(implicit caller: ApiCaller): Either[RiotException, Option[SummonerSpell]] = {
+  def champStaticDataById(id: Int)(implicit caller: ApiCaller): Either[RiotException, Option[Champion]] = {
+    implicit val url = s"https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion/$id?&api_key="
+    jsonToOption[Champion]
+  }
+
+  def spellStaticDataById(id: Int)(implicit caller: ApiCaller): Either[RiotException, Option[SummonerSpell]] = {
     implicit val url = s"https://na.api.pvp.net/api/lol/static-data/na/$staticDataVer/summoner-spell/$id?api_key="
     jsonToOption[SummonerSpell]
   }
