@@ -1,7 +1,7 @@
 package thangiee.riotapi.stats
 
 import play.api.libs.json._
-import thangiee.riotapi.stats.AggregatedStats.AggregatedStats
+import thangiee.riotapi.stats.aggregatedstats.AggregatedStats
 
 case class PlayerStatsSummary
 (aggregatedStats: AggregatedStats,

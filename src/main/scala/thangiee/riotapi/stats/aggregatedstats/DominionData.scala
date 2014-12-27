@@ -1,4 +1,4 @@
-package thangiee.riotapi.stats.AggregatedStats
+package thangiee.riotapi.stats.aggregatedstats
 
 import play.api.libs.json._
 
