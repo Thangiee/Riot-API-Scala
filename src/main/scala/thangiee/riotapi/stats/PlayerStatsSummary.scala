@@ -4,11 +4,11 @@ import play.api.libs.json._
 import thangiee.riotapi.stats.aggregatedstats.AggregatedStats
 
 case class PlayerStatsSummary
-(aggregatedStats: AggregatedStats,
- losses: Option[Int],
- modifyDate: Long,
- playerStatSummaryType: String,
- wins: Int
+(aggregatedStats: AggregatedStats = AggregatedStats(),
+ losses: Option[Int] = None,
+ modifyDate: Long = 0,
+ playerStatSummaryType: String = "",
+ wins: Int = 0
   )
 
 object PlayerStatsSummary {

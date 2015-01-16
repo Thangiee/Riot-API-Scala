@@ -3,21 +3,21 @@ package thangiee.riotapi.game.rawstats
 import play.api.libs.json._
 
 case class Data4
-(totalPlayerScore: Option[Int],
- totalScoreRank: Option[Int],
- totalTimeCrowdControlDealt: Option[Int],
- totalUnitsHealed: Option[Int],
- tripleKills: Option[Int],
- trueDamageDealtPlayer: Option[Int],
- trueDamageDealtToChampions: Option[Int],
- trueDamageTaken: Option[Int],
- turretsKilled: Option[Int],
- unrealKills: Option[Int],
- victoryPointTotal: Option[Int],
- visionWardsBought: Option[Int],
- wardKilled: Option[Int],
- wardPlaced: Option[Int],
- win: Option[Boolean]
+(totalPlayerScore: Option[Int] = None,
+ totalScoreRank: Option[Int] = None,
+ totalTimeCrowdControlDealt: Option[Int] = None,
+ totalUnitsHealed: Option[Int] = None,
+ tripleKills: Option[Int] = None,
+ trueDamageDealtPlayer: Option[Int] = None,
+ trueDamageDealtToChampions: Option[Int] = None,
+ trueDamageTaken: Option[Int] = None,
+ turretsKilled: Option[Int] = None,
+ unrealKills: Option[Int] = None,
+ victoryPointTotal: Option[Int] = None,
+ visionWardsBought: Option[Int] = None,
+ wardKilled: Option[Int] = None,
+ wardPlaced: Option[Int] = None,
+ win: Option[Boolean] = None
   )
 
 object Data4 {

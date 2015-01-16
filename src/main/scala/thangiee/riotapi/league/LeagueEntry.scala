@@ -3,16 +3,16 @@ package thangiee.riotapi.league
 import play.api.libs.json._
 
 case class LeagueEntry
-(division: String,
- isFreshBlood: Boolean,
- isHotStreak: Boolean,
- isInactive: Boolean,
- isVeteran: Boolean,
- leaguePoints: Int,
- miniSeries: Option[MiniSeries],
- playerOrTeamId: String,
- playerOrTeamName: String,
- wins: Int
+(division: String = "",
+ isFreshBlood: Boolean = false,
+ isHotStreak: Boolean = false,
+ isInactive: Boolean = false,
+ isVeteran: Boolean = false,
+ leaguePoints: Int = 0,
+ miniSeries: Option[MiniSeries] = None,
+ playerOrTeamId: String = "",
+ playerOrTeamName: String = "",
+ wins: Int = 0
   )
 
 object LeagueEntry {

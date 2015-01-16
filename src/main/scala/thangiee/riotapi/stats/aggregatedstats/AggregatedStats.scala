@@ -2,7 +2,7 @@ package thangiee.riotapi.stats.aggregatedstats
 
 import play.api.libs.json._
 
-case class AggregatedStats(data1: Data1, data2: Data2, dominionData: DominionData)
+case class AggregatedStats(data1: Data1 = Data1(), data2: Data2 = Data2(), dominionData: DominionData = DominionData())
 
 object AggregatedStats {
   import play.api.libs.functional.syntax._

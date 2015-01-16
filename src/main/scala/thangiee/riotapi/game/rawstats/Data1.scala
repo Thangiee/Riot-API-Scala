@@ -3,26 +3,26 @@ package thangiee.riotapi.game.rawstats
 import play.api.libs.json._
 
 case class Data1
-(assists: Option[Int],
- barracksKilled: Option[Int],
- championsKilled: Option[Int],
- combatPlayerScore: Option[Int],
- consumablesPurchased: Option[Int],
- damageDealtPlayer: Option[Int],
- doubleKills: Option[Int],
- firstBlood: Option[Int],
- gold: Option[Int],
- goldEarned: Option[Int],
- goldSpent: Option[Int],
- item0: Option[Int],
- item1: Option[Int],
- item2: Option[Int],
- item3: Option[Int],
- item4: Option[Int],
- item5: Option[Int],
- item6: Option[Int],
- itemsPurchased: Option[Int
-])
+(assists: Option[Int] = None,
+ barracksKilled: Option[Int] = None,
+ championsKilled: Option[Int] = None,
+ combatPlayerScore: Option[Int] = None,
+ consumablesPurchased: Option[Int] = None,
+ damageDealtPlayer: Option[Int] = None,
+ doubleKills: Option[Int] = None,
+ firstBlood: Option[Int] = None,
+ gold: Option[Int] = None,
+ goldEarned: Option[Int] = None,
+ goldSpent: Option[Int] = None,
+ item0: Option[Int] = None,
+ item1: Option[Int] = None,
+ item2: Option[Int] = None,
+ item3: Option[Int] = None,
+ item4: Option[Int] = None,
+ item5: Option[Int] = None,
+ item6: Option[Int] = None,
+ itemsPurchased: Option[Int] = None
+  )
 
 object Data1 {
   implicit val data1Fmt = Json.reads[Data1]
