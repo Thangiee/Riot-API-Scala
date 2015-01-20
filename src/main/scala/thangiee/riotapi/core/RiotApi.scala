@@ -20,7 +20,7 @@ object RiotApi {
 
   def region(region: String) = reg_ = region.toLowerCase
 
-  def baseUrl(region: String = reg_) = s"https://$region.api.pvp.net/api/lol/$region"
+  def baseUrl(region: String = reg_) = s"https://${region.toLowerCase}.api.pvp.net/api/lol/${region.toLowerCase}"
 
   def key(key: String) = key_ = ApiKey(key)
 
