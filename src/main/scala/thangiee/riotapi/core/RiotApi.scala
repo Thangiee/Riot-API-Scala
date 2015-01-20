@@ -43,7 +43,7 @@ object RiotApi {
   }
 
   def leagueEntryById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, List[League]] = {
-    leagueEntryByIds(List(id)).right.map(_.getOrElse(id, Nil))
+    leagueEntryByIds(List(id), reg).right.map(_.getOrElse(id, Nil))
   }
 
   // =====================
