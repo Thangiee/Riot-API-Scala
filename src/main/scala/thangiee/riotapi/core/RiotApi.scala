@@ -18,11 +18,15 @@ object RiotApi {
   val statsVer = "v1.3"
   val leagueVer = "v2.5"
 
-  def region(region: String) = reg_ = region.toLowerCase
+  def regionId_=(regionId: String) = reg_ = regionId.toLowerCase
+
+  def regionId = reg_
 
   def baseUrl(region: String = reg_) = s"https://${region.toLowerCase}.api.pvp.net/api/lol/${region.toLowerCase}"
 
-  def key(key: String) = key_ = ApiKey(key)
+  def key_=(key: String) = key_ = ApiKey(key)
+
+  def key = key_
 
   // =====================
   //    Games api calls
