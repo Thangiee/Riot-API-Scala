@@ -1,6 +1,7 @@
 package thangiee.riotapi.core
 
 import play.api.libs.json._
+import thangiee.riotapi.currentgame.CurrentGameInfo
 import thangiee.riotapi.game.RecentGames
 import thangiee.riotapi.league.League
 import thangiee.riotapi.static_data.{Champion, SummonerSpell}
@@ -10,13 +11,13 @@ import thangiee.riotapi.team.Team
 
 object RiotApi {
   private implicit var key_ = ApiKey("")
-  private var reg_ = "na"
-  val gameVer = "v1.3"
-  val summVer = "v1.4"
-  val teamVer = "v2.4"
+  private          var reg_ = "na"
+  val gameVer       = "v1.3"
+  val summVer       = "v1.4"
+  val teamVer       = "v2.4"
   val staticDataVer = "v1.2"
-  val statsVer = "v1.3"
-  val leagueVer = "v2.5"
+  val statsVer      = "v1.3"
+  val leagueVer     = "v2.5"
 
   def regionId_=(regionId: String) = reg_ = regionId.toLowerCase
 
@@ -27,6 +28,28 @@ object RiotApi {
   def key_=(key: String) = key_ = ApiKey(key)
 
   def key = key_
+
+  // =====================
+  //    Games api calls
+  // =====================
+
+  def currentGameInfoById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Either[RiotException, CurrentGameInfo] = {
+    val platformId = reg.toLowerCase match {
+      case "na"   => "NA1"
+      case "euw"  => "EUW1"
+      case "eune" => "EUN1"
+      case "kr"   => "KR"
+      case "oce"  => "OC1"
+      case "br"   => "BR1"
+      case "lan"  => "LA1"
+      case "las"  => "LA2"
+      case "ru"   => "RU"
+      case "tr"   => "TR1"
+      case _      => "PBE1"
+    }
+    implicit val url = s"https://$reg.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/$platformId/$id?api_key="
+    jsonTo[CurrentGameInfo]
+  }
 
   // =====================
   //    Games api calls
@@ -143,7 +166,9 @@ object RiotApi {
   }
 
   private def jsonTo[A, B: Reads](key: A)(implicit caller: ApiCaller, url: String): Either[RiotException, B] = {
-    caller.call(url).right.map(json => { println(json); (Json.parse(json) \ key.toString).as[B] })
+    caller.call(url).right.map(json => {
+      println(json); (Json.parse(json) \ key.toString).as[B]
+    })
   }
 
   private def jsonTo[A: Reads]()(implicit caller: ApiCaller, url: String): Either[RiotException, A] = {
