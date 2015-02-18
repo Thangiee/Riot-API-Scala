@@ -1,6 +1,6 @@
 name := "riot-api-scala"
 
-version := "1.1.2"
+version := "0.2.0"
 
 scalaVersion := "2.11.4"
 
