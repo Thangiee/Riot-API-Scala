@@ -12,8 +12,8 @@ import thangiee.riotapi.team.Team
 import scala.util.Try
 
 object RiotApi {
-  private implicit var key_ = ApiKey("")
-  private          var reg_ = "na"
+  private implicit var _key = ApiKey("")
+  private           var _reg = "na"
   val gameVer       = "v1.3"
   val summVer       = "v1.4"
   val teamVer       = "v2.4"
@@ -21,21 +21,21 @@ object RiotApi {
   val statsVer      = "v1.3"
   val leagueVer     = "v2.5"
 
-  def regionId_=(regionId: String) = reg_ = regionId.toLowerCase
+  def regionId_=(regionId: String) = _reg = regionId.toLowerCase
 
-  def regionId = reg_
+  def regionId = _reg
 
-  def baseUrl(region: String = reg_) = s"https://${region.toLowerCase}.api.pvp.net/api/lol/${region.toLowerCase}"
+  def baseUrl(region: String = _reg) = s"https://${region.toLowerCase}.api.pvp.net/api/lol/${region.toLowerCase}"
 
-  def key_=(key: String) = key_ = ApiKey(key)
+  def key_=(key: String) = _key = ApiKey(key)
 
-  def key = key_
+  def key = _key
 
   // =====================
   //    Games api calls
   // =====================
 
-  def currentGameInfoById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Try[CurrentGameInfo] = {
+  def currentGameInfoById(id: Long, reg: String = _reg)(implicit caller: ApiCaller): Try[CurrentGameInfo] = {
     val platformId = reg.toLowerCase match {
       case "na"   => "NA1"
       case "euw"  => "EUW1"
@@ -57,7 +57,7 @@ object RiotApi {
   //    Games api calls
   // =====================
 
-  def recentGamesById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Try[RecentGames] = {
+  def recentGamesById(id: Long, reg: String = _reg)(implicit caller: ApiCaller): Try[RecentGames] = {
     implicit val url = s"${baseUrl(reg)}/$gameVer/game/by-summoner/$id/recent?api_key="
     jsonTo[RecentGames]
   }
@@ -66,12 +66,12 @@ object RiotApi {
   //    league api calls
   // =====================
 
-  def leagueEntryByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Try[Map[Long, List[League]]] = {
+  def leagueEntryByIds(ids: List[Long], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[Long, List[League]]] = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-summoner/${ids.mkString(",")}/entry?api_key="
     jsonToMap[Long, List[League]](ids)
   }
 
-  def leagueEntryById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Try[List[League]] = {
+  def leagueEntryById(id: Long, reg: String = _reg)(implicit caller: ApiCaller): Try[List[League]] = {
     leagueEntryByIds(List(id), reg).map(_.getOrElse(id, Nil))
   }
 
@@ -79,12 +79,12 @@ object RiotApi {
   //    Stats api calls
   // =====================
 
-  def rankedStatsById(id: Long, season: Int, reg: String = reg_)(implicit caller: ApiCaller): Try[RankedStats] = {
+  def rankedStatsById(id: Long, season: Int, reg: String = _reg)(implicit caller: ApiCaller): Try[RankedStats] = {
     implicit val url = s"${baseUrl(reg)}/$statsVer/stats/by-summoner/$id/ranked?season=SEASON$season&api_key="
     jsonTo[RankedStats]
   }
 
-  def summaryStatsById(id: Long, season: Int, reg: String = reg_)(implicit caller: ApiCaller): Try[PlayerStatsSummaryList] = {
+  def summaryStatsById(id: Long, season: Int, reg: String = _reg)(implicit caller: ApiCaller): Try[PlayerStatsSummaryList] = {
     implicit val url = s"${baseUrl(reg)}/$statsVer/stats/by-summoner/$id/summary?season=SEASON$season&api_key="
     jsonTo[PlayerStatsSummaryList]
   }
@@ -93,37 +93,37 @@ object RiotApi {
   //  Summoner api calls
   // =====================
 
-  def summonerByNames(names: List[String], reg: String = reg_)(implicit caller: ApiCaller): Try[Map[String, Summoner]] = {
+  def summonerByNames(names: List[String], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[String, Summoner]] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/by-name/${names.mkString(",")}?api_key="
     jsonToMap[String, Summoner](names)
   }
 
-  def summonerByName(name: String, reg: String = reg_)(implicit caller: ApiCaller):Try[Summoner] = {
+  def summonerByName(name: String, reg: String = _reg)(implicit caller: ApiCaller):Try[Summoner] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/by-name/$name?api_key="
     jsonTo[String, Summoner](name)
   }
 
-  def summonerByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Try[Map[Long, Summoner]] = {
+  def summonerByIds(ids: List[Long], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[Long, Summoner]] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/${ids.mkString(",")}?api_key="
     jsonToMap[Long, Summoner](ids)
   }
 
-  def summonerById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Try[Summoner] = {
+  def summonerById(id: Long, reg: String = _reg)(implicit caller: ApiCaller): Try[Summoner] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/$id?api_key="
     jsonTo[Long, Summoner](id)
   }
 
-  def masteryPagesByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Try[Map[Long, MasteryPages]] = {
+  def masteryPagesByIds(ids: List[Long], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[Long, MasteryPages]] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/${ids.mkString(",")}/masteries?api_key="
     jsonToMap[Long, MasteryPages](ids)
   }
 
-  def summonerNameById(id: Long, reg: String = reg_)(implicit caller: ApiCaller): Try[String] = {
+  def summonerNameById(id: Long, reg: String = _reg)(implicit caller: ApiCaller): Try[String] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/$id/name?api_key="
     jsonTo[Long, String](id)
   }
 
-  def runePagesByIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Try[Map[Long, RunePages]] = {
+  def runePagesByIds(ids: List[Long], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[Long, RunePages]] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/${ids.mkString(",")}/runes?api_key="
     jsonToMap[Long, RunePages](ids)
   }
@@ -132,12 +132,12 @@ object RiotApi {
   //    Team api calls
   // =====================
 
-  def teamBySummonerIds(ids: List[Long], reg: String = reg_)(implicit caller: ApiCaller): Try[Map[Long, List[Team]]] = {
+  def teamBySummonerIds(ids: List[Long], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[Long, List[Team]]] = {
     implicit val url = s"${baseUrl(reg)}/$teamVer/team/by-summoner/${ids.mkString(",")}?api_key="
     jsonToMap[Long, List[Team]](ids)
   }
 
-  def teamByTeamIds(ids: List[String], reg: String = reg_)(implicit caller: ApiCaller): Try[Map[String, Team]] = {
+  def teamByTeamIds(ids: List[String], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[String, Team]] = {
     implicit val url = s"${baseUrl(reg)}/$teamVer/team/${ids.mkString(",")}?api_key="
     jsonToMap[String, Team](ids)
   }
