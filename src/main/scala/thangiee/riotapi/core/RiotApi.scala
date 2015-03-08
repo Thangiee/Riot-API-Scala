@@ -95,12 +95,12 @@ object RiotApi {
 
   def summonerByNames(names: List[String], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[String, Summoner]] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/by-name/${names.mkString(",")}?api_key="
-    jsonToMap[String, Summoner](names)
+    jsonToMap[String, Summoner](names.map(_.toLowerCase))
   }
 
   def summonerByName(name: String, reg: String = _reg)(implicit caller: ApiCaller):Try[Summoner] = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/by-name/$name?api_key="
-    jsonTo[String, Summoner](name)
+    jsonTo[String, Summoner](name.toLowerCase)
   }
 
   def summonerByIds(ids: List[Long], reg: String = _reg)(implicit caller: ApiCaller): Try[Map[Long, Summoner]] = {

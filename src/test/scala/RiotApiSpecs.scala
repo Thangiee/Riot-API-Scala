@@ -46,6 +46,12 @@ class RiotApiSpecs extends Specification with Mockito {
       RiotApi.summonerByNames(List("thangiee", "lolwithfriends")) must beSuccessfulTry
         .which(_ must haveKeys("thangiee", "lolwithfriends"))
     }
+
+    "work given uppercase names" in new CustomScope {
+      def json = "{\"lolwithfriends\":{\"id\":58229565,\"name\":\"lolwithfriends\",\"profileIconId\":24,\"summonerLevel\":1,\"revisionDate\":1406570337000}}"
+      RiotApi.summonerByNames(List("LOLWITHFRIENDS")) must beSuccessfulTry
+        .which(_ must haveSize(1) haveKey "lolwithfriends")
+    }
   }
 
   "Calling summonerByIds" should {
@@ -92,6 +98,7 @@ class RiotApiSpecs extends Specification with Mockito {
 
   abstract class CustomScope extends Scope {
     def json: String
+    RiotApi.key = "456267a6-1777-4763-a77f-f3b1f06ed99d"
     implicit val m: ApiCaller = mock[ApiCaller]
     m.call(anyString) returns Success(json)
   }
