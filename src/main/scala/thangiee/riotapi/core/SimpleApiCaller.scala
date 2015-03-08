@@ -5,10 +5,9 @@ import thangiee.riotapi.core.RiotException._
 import scala.util.{Failure, Success, Try}
 import scalaj.http.Http
 
-class SimpleApiCaller extends ApiCaller {
-
-  override def call(url: String)(implicit apiKey: ApiKey): Try[String] = {
-    Try(Http(url + apiKey.key).asString) match {
+trait SimpleApiCaller extends ApiCaller {
+  override def call(url: String): Try[String] = {
+    Try(Http(url + RiotApi.key).asString) match {
       case Success(response) =>
         response.code match {
           case 200 => Success(response.body)
@@ -24,3 +23,5 @@ class SimpleApiCaller extends ApiCaller {
     }
   }
 }
+
+object SimpleApiCaller extends SimpleApiCaller

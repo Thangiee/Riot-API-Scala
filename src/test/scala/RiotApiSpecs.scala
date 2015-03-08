@@ -1,7 +1,7 @@
 import org.specs2.mock._
 import org.specs2.mutable._
 import org.specs2.specification.Scope
-import thangiee.riotapi.core.{ApiCaller, ApiKey, RiotApi}
+import thangiee.riotapi.core.{ApiCaller, RiotApi}
 
 import scala.util.Success
 
@@ -92,9 +92,8 @@ class RiotApiSpecs extends Specification with Mockito {
 
   abstract class CustomScope extends Scope {
     def json: String
-    implicit val key          = ApiKey("")
     implicit val m: ApiCaller = mock[ApiCaller]
-    m.call(anyString)(any[ApiKey]) returns Success(json)
+    m.call(anyString) returns Success(json)
   }
 
 }

@@ -1,8 +1,8 @@
 name := "riot-api-scala"
 
-version := "0.2.0"
+version := "0.2.1"
 
-scalaVersion := "2.11.4"
+scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
   "com.typesafe.play" % "play-json_2.11" % "2.4.0-M2",

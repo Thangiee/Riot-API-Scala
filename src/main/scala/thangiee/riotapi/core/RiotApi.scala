@@ -12,8 +12,8 @@ import thangiee.riotapi.team.Team
 import scala.util.Try
 
 object RiotApi {
-  private implicit var _key = ApiKey("")
-  private           var _reg = "na"
+  private var _key = ""
+  private var _reg = "na"
   val gameVer       = "v1.3"
   val summVer       = "v1.4"
   val teamVer       = "v2.4"
@@ -27,7 +27,7 @@ object RiotApi {
 
   def baseUrl(region: String = _reg) = s"https://${region.toLowerCase}.api.pvp.net/api/lol/${region.toLowerCase}"
 
-  def key_=(key: String) = _key = ApiKey(key)
+  def key_=(key: String) = _key = key
 
   def key = _key
 
