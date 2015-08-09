@@ -2,29 +2,29 @@ package thangiee.riotapi.stats.aggregatedstats
 
 import play.api.libs.json._
 
-case class DominionData
-(averageAssists: Option[Int] = None,
- averageChampionsKilled: Option[Int] = None,
- averageCombatPlayerScore: Option[Int] = None,
- averageNodeCapture: Option[Int] = None,
- averageNodeCaptureAssist: Option[Int] = None,
- averageNodeNeutralize: Option[Int] = None,
- averageNodeNeutralizeAssist: Option[Int] = None,
- averageNumDeaths: Option[Int] = None,
- averageObjectivePlayerScore: Option[Int] = None,
- averageTeamObjective: Option[Int] = None,
- averageTotalPlayerScore: Option[Int] = None,
- maxAssists: Option[Int] = None,
- maxCombatPlayerScore: Option[Int] = None,
- maxNodeCapture: Option[Int] = None,
- maxNodeCaptureAssist: Option[Int] = None,
- maxNodeNeutralize: Option[Int] = None,
- maxNodeNeutralizeAssist: Option[Int] = None,
- maxObjectivePlayerScore: Option[Int] = None,
- maxTeamObjective: Option[Int] = None,
- maxTotalPlayerScore: Option[Int] = None,
- totalNodeCapture: Option[Int] = None,
- totalNodeNeutralize: Option[Int] = None
+case class DominionData(
+  averageAssists: Int = 0,
+  averageChampionsKilled: Int = 0,
+  averageCombatPlayerScore: Int = 0,
+  averageNodeCapture: Int = 0,
+  averageNodeCaptureAssist: Int = 0,
+  averageNodeNeutralize: Int = 0,
+  averageNodeNeutralizeAssist: Int = 0,
+  averageNumDeaths: Int = 0,
+  averageObjectivePlayerScore: Int = 0,
+  averageTeamObjective: Int = 0,
+  averageTotalPlayerScore: Int = 0,
+  maxAssists: Int = 0,
+  maxCombatPlayerScore: Int = 0,
+  maxNodeCapture: Int = 0,
+  maxNodeCaptureAssist: Int = 0,
+  maxNodeNeutralize: Int = 0,
+  maxNodeNeutralizeAssist: Int = 0,
+  maxObjectivePlayerScore: Int = 0,
+  maxTeamObjective: Int = 0,
+  maxTotalPlayerScore: Int = 0,
+  totalNodeCapture: Int = 0,
+  totalNodeNeutralize: Int = 0
   )
 
 object DominionData {

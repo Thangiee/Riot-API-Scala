@@ -2,28 +2,28 @@ package thangiee.riotapi.game.rawstats
 
 import play.api.libs.json._
 
-case class Data3
-(objectivePlayerScore: Option[Int] = None,
- pentaKills: Option[Int] = None,
- physicalDamageDealtPlayer: Option[Int] = None,
- physicalDamageDealtToChampions: Option[Int] = None,
- physicalDamageTaken: Option[Int] = None,
- quadraKills: Option[Int] = None,
- sightWardsBought: Option[Int] = None,
- spell1Cast: Option[Int] = None,
- spell2Cast: Option[Int] = None,
- spell3Cast: Option[Int] = None,
- spell4Cast: Option[Int] = None,
- summonSpell1Cast: Option[Int] = None,
- summonSpell2Cast: Option[Int] = None,
- superMonsterKilled: Option[Int] = None,
- team: Option[Int] = None,
- teamObjective: Option[Int] = None,
- timePlayed: Option[Int] = None,
- totalDamageDealt: Option[Int] = None,
- totalDamageDealtToChampions: Option[Int] = None,
- totalDamageTaken: Option[Int] = None,
- totalHeal: Option[Int] = None
+case class Data3(
+  objectivePlayerScore: Int = 0,
+  pentaKills: Int = 0,
+  physicalDamageDealtPlayer: Int = 0,
+  physicalDamageDealtToChampions: Int = 0,
+  physicalDamageTaken: Int = 0,
+  quadraKills: Int = 0,
+  sightWardsBought: Int = 0,
+  spell1Cast: Int = 0,
+  spell2Cast: Int = 0,
+  spell3Cast: Int = 0,
+  spell4Cast: Int = 0,
+  summonSpell1Cast: Int = 0,
+  summonSpell2Cast: Int = 0,
+  superMonsterKilled: Int = 0,
+  team: Int = 0,
+  teamObjective: Int = 0,
+  timePlayed: Int = 0,
+  totalDamageDealt: Int = 0,
+  totalDamageDealtToChampions: Int = 0,
+  totalDamageTaken: Int = 0,
+  totalHeal: Int = 0
   )
 
 object Data3 {

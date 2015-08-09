@@ -2,28 +2,28 @@ package thangiee.riotapi.game.rawstats
 
 import play.api.libs.json._
 
-case class Data2
-(killingSprees: Option[Int] = None,
- largestCriticalStrike: Option[Int] = None,
- largestKillingSpree: Option[Int] = None,
- largestMultiKill: Option[Int] = None,
- legendaryItemsCreated: Option[Int] = None,
- level: Option[Int] = None,
- magicDamageDealtPlayer: Option[Int] = None,
- magicDamageDealtToChampions: Option[Int] = None,
- magicDamageTaken: Option[Int] = None,
- minionsDenied: Option[Int] = None,
- minionsKilled: Option[Int] = None,
- neutralMinionsKilled: Option[Int] = None,
- neutralMinionsKilledEnemyJungle: Option[Int] = None,
- neutralMinionsKilledYourJungle: Option[Int] = None,
- nexusKilled: Option[Boolean] = None,
- nodeCapture: Option[Int] = None,
- nodeCaptureAssist: Option[Int] = None,
- nodeNeutralize: Option[Int] = None,
- nodeNeutralizeAssist: Option[Int] = None,
- numDeaths: Option[Int] = None,
- numItemsBought: Option[Int] = None
+case class Data2(
+  killingSprees: Int = 0,
+  largestCriticalStrike: Int = 0,
+  largestKillingSpree: Int = 0,
+  largestMultiKill: Int = 0,
+  legendaryItemsCreated: Int = 0,
+  level: Int = 0,
+  magicDamageDealtPlayer: Int = 0,
+  magicDamageDealtToChampions: Int = 0,
+  magicDamageTaken: Int = 0,
+  minionsDenied: Int = 0,
+  minionsKilled: Int = 0,
+  neutralMinionsKilled: Int = 0,
+  neutralMinionsKilledEnemyJungle: Int = 0,
+  neutralMinionsKilledYourJungle: Int = 0,
+  nexusKilled: Boolean = false,
+  nodeCapture: Int = 0,
+  nodeCaptureAssist: Int = 0,
+  nodeNeutralize: Int = 0,
+  nodeNeutralizeAssist: Int = 0,
+  numDeaths: Int = 0,
+  numItemsBought: Int =0
   )
 
 object Data2 {

@@ -2,17 +2,17 @@ package thangiee.riotapi.currentgame
 
 import play.api.libs.json._
 
-case class Participant
-(bot: Boolean,
- championId: Long,
- masteries: List[Mastery],
- profileIconId: Long,
- runes: List[Rune],
- spell1Id: Long,
- spell2Id: Long,
- summonerId: Long,
- summonerName: String,
- teamId: Long
+case class Participant(
+  bot: Boolean = false,
+  championId: Long = 0,
+  masteries: List[Mastery] = Nil,
+  profileIconId: Long = 0,
+  runes: List[Rune] = Nil,
+  spell1Id: Long = 0,
+  spell2Id: Long = 0,
+  summonerId: Long = 0 ,
+  summonerName: String = "",
+  teamId: Long = 0
   )
 
 object Participant {
