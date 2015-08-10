@@ -6,7 +6,7 @@ import thangiee.riotapi.`match`.MatchDetail
 import thangiee.riotapi.currentgame.CurrentGameInfo
 import thangiee.riotapi.game.RecentGames
 import thangiee.riotapi.league.League
-import thangiee.riotapi.matchhistory.{PlayerHistory, MatchSummary}
+import thangiee.riotapi.matchhistory.PlayerHistory
 import thangiee.riotapi.matchlist.MatchList
 import thangiee.riotapi.staticdata.{Champion, SummonerSpell}
 import thangiee.riotapi.stats.{PlayerStatsSummaryList, RankedStats}
