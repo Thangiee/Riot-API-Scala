@@ -4,6 +4,10 @@ version := "0.2.1"
 
 scalaVersion := "2.11.6"
 
+organization := "com.github.thangiee"
+
+publishMavenStyle := true
+
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 
 resolvers += "thangiee repo" at "http://dl.bintray.com/thangiee/maven"
@@ -17,3 +21,7 @@ libraryDependencies ++= List(
 )
 
 scalacOptions in Test ++= Seq("-Yrangepos")
+
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+
+bintrayVcsUrl := Some("https://github.com/Thangiee/Riot-API-Scala")
