@@ -6,10 +6,10 @@ package object riotapi {
   type JsonString = String
 
   sealed trait RiotError
-  object BadRequest extends RiotError
-  object Unauthorized extends RiotError
+  case class BadRequest(url: String) extends RiotError
+  case class Unauthorized(key: String) extends RiotError
+  case class RateLimit(key: String) extends RiotError
   object DataNotFound extends RiotError
-  object RateLimit extends RiotError
   object ServerError extends RiotError
   object ServiceUnavailable extends RiotError
   object TimeOut extends RiotError

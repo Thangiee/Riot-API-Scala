@@ -15,6 +15,11 @@ import thangiee.riotapi.team.Team
 
 import scala.concurrent.duration._
 
+/** Provide everything you need to consume the Riot API
+  * <p>
+  * See <a href="https://developer.riotgames.com/api/methods">https://developer.riotgames.com/api/methods</a> for
+  * documentations of all api methods.
+  */
 object RiotApi {
   private var _key = ""
   private var _reg = "na"
@@ -27,15 +32,22 @@ object RiotApi {
   val leagueVer     = "v2.5"
   val matchVer      = "v2.2"
 
-  def regionId_=(regionId: String) = _reg = regionId.toLowerCase
+  /** Set the default region that will be used if no region is specified when using an api call
+    * @param regionId abbreviation of a region's name
+    */
+  def regionId_=(regionId: String): Unit = _reg = regionId.toLowerCase
 
-  def regionId = _reg
+  /** Get the default region */
+  def regionId: String = _reg
 
-  def baseUrl(region: String = _reg) = s"https://${region.toLowerCase}.api.pvp.net/api/lol/${region.toLowerCase}"
+  /** Generate the common part of the URL in all api URLs */
+  def baseUrl(region: String = _reg): String = s"https://${region.toLowerCase}.api.pvp.net/api/lol/${region.toLowerCase}"
 
-  def key_=(key: String) = _key = key
+  /** Set the api key to use for api calls */
+  def key_=(key: String): Unit = _key = key
 
-  def key = _key
+  /** Get the currently set api key */
+  def key: String = _key
 
   // =====================
   //   Current games api call
@@ -43,17 +55,17 @@ object RiotApi {
 
   def currentGameInfoById(id: Long, ttl: Duration = 20.minutes, reg: String = _reg)(implicit c: ApiCaller): CurrentGameInfo Or RiotError = {
     val platformId = reg.toLowerCase match {
-      case "na"   => "NA1"
-      case "euw"  => "EUW1"
+      case "na" => "NA1"
+      case "euw" => "EUW1"
       case "eune" => "EUN1"
-      case "kr"   => "KR"
-      case "oce"  => "OC1"
-      case "br"   => "BR1"
-      case "lan"  => "LA1"
-      case "las"  => "LA2"
-      case "ru"   => "RU"
-      case "tr"   => "TR1"
-      case _      => "PBE1"
+      case "kr" => "KR"
+      case "oce" => "OC1"
+      case "br" => "BR1"
+      case "lan" => "LA1"
+      case "las" => "LA2"
+      case "ru" => "RU"
+      case "tr" => "TR1"
+      case _ => "PBE1"
     }
     implicit val url = s"https://$reg.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/$platformId/$id?api_key=$key"
     jsonTo[CurrentGameInfo](ttl)
@@ -86,7 +98,7 @@ object RiotApi {
     leagueEntryByIds(List(id), ttl, reg).map(_.getOrElse(id, Nil))
   }
 
-  def leagueByTeamIds(ids: List[Long],ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[League]] Or RiotError = {
+  def leagueByTeamIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-team/${ids.mkString(",")}?api_key=$key"
     jsonToMap[Long, List[League]](ids, ttl)
   }
@@ -163,7 +175,7 @@ object RiotApi {
   //    Team api calls
   // =====================
 
-  def teamBySummonerIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[Team]] Or RiotError= {
+  def teamBySummonerIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[Team]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$teamVer/team/by-summoner/${ids.mkString(",")}?api_key=$key"
     jsonToMap[Long, List[Team]](ids, ttl)
   }

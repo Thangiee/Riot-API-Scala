@@ -16,7 +16,7 @@ class RiotApiSpec extends BaseSpec {
     RiotApi.summonerById(0).map { summ =>
       fail("Excepted Unauthorized Error")
     }.recover {
-      case Unauthorized => // success
+      case Unauthorized(_) => // success
       case _ => fail("Excepted Unauthorized Error")
     }
   }
