@@ -13,8 +13,6 @@ class RiotApiSpec extends BaseSpec {
   "Using an invalid api key" should "return a Bad(Unauthorized)" in {
     RiotApi.key = ""
 
-    import thangiee.riotapi.Implicit.simpleApiCaller
-
     RiotApi.summonerById(0).map { summ =>
       fail("Excepted Unauthorized Error")
     }.recover {

@@ -1,5 +1,7 @@
 package thangiee
 
+import scala.concurrent.duration.{TimeUnit, Duration, FiniteDuration, DurationConversions}
+
 package object riotapi {
   type JsonString = String
 
@@ -17,7 +19,22 @@ package object riotapi {
   object RankedTeam5v5 extends QueueType { def `type`: String = "RANKED_TEAM_5x5" }
   object RankedTeam3v3 extends QueueType { def `type`: String = "RANKED_TEAM_3x3" }
 
-  object Implicit {
-    implicit val simpleApiCaller = SimpleApiCaller
+  // Taken from scala.concurrent.duration package object to let the client
+  // use the duration conversions easily without need to import scala.concurrent.duration._
+  implicit final class DurationInt(private val n: Int) extends AnyVal with DurationConversions {
+    override protected def durationIn(unit: TimeUnit): FiniteDuration = Duration(n.toLong, unit)
   }
+
+  implicit final class DurationLong(private val n: Long) extends AnyVal with DurationConversions {
+    override protected def durationIn(unit: TimeUnit): FiniteDuration = Duration(n, unit)
+  }
+
+  implicit final class DurationDouble(private val d: Double) extends AnyVal with DurationConversions {
+    override protected def durationIn(unit: TimeUnit): FiniteDuration =
+      Duration(d, unit) match {
+        case f: FiniteDuration => f
+        case _ => throw new IllegalArgumentException("Duration DSL not applicable to " + d)
+      }
+  }
+  // ==================================================================
 }
