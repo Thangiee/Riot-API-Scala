@@ -36,7 +36,7 @@ class SummonerSpec extends BaseSpec {
   "Calling summonerByIds" should
     "return a map of summoners whose keys correspond to the summoner's id" in new MockScope {
       def json = "{\"19291008\":{\"id\":19291008,\"name\":\"TOM\",\"profileIconId\":642,\"summonerLevel\":30,\"revisionDate\":1398435976000}}"
-      RiotApi.summonerByIds(List(19291008), "euw").map(_ should (have size 1 and contain key 19291008))
+      RiotApi.summonerByIds(List(19291008), reg = "euw").map(_ should (have size 1 and contain key 19291008))
     }
 
   "Calling runePagesByIds" should
