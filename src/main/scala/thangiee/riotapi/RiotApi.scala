@@ -152,7 +152,7 @@ object RiotApi {
   }
 
   def summonerById(id: Long, ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Summoner Or RiotError = {
-    implicit val url = s"${baseUrl(reg)}/$summVer/summoner/$id?api_key="
+    implicit val url = s"${baseUrl(reg)}/$summVer/summoner/$id?api_key=$key"
     jsonTo[Long, Summoner](id, ttl)
   }
 

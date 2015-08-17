@@ -14,7 +14,7 @@ trait ApiCaller {
 
   /** Fetch JSON string from the Riot RESTful API
    *
-   * @param url the URL to a specific API
+   * @param url the URL to a specific API. This url also includes the default api key set by [[RiotApi.key]].
    * @param ttl (time to live) caching duration
    * @return content of the API response as a JSON string
    */
