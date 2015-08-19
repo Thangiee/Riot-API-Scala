@@ -1,6 +1,5 @@
 package thangiee.riotapi
 
-import thangiee.riotapi.BaseSpec
 import thangiee.riotapi.staticdata.{Champion, SummonerSpell}
 
 class StaticDataSpec extends BaseSpec {

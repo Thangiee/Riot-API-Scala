@@ -1,7 +1,5 @@
 package thangiee.riotapi
 
-import thangiee.riotapi.BaseSpec
-
 class RiotApiSpec extends BaseSpec {
 
   "The base URL string" should "match the correct region" in {

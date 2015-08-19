@@ -1,7 +1,5 @@
 package thangiee.riotapi
 
-import thangiee.riotapi.BaseSpec
-
 class SummonerSpec extends BaseSpec {
 
   "Calling summonerByNames" should "return an empty map if the json is empty" in new MockScope {

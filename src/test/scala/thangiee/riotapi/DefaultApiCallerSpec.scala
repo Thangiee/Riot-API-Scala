@@ -1,7 +1,5 @@
 package thangiee.riotapi
 
-import thangiee.riotapi.BaseSpec
-
 class DefaultApiCallerSpec extends BaseSpec {
 
   "Using an invalid api key" should "result in an Unauthorized error" in {
