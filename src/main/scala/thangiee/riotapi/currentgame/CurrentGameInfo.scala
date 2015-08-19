@@ -3,17 +3,17 @@ package thangiee.riotapi.currentgame
 import play.api.libs.json._
 
 case class CurrentGameInfo(
-  bannedChampions: List[BannedChampion] = Nil,
-  gameId: Long = 0,
-  gameLength: Long = 0,
-  gameMode: String = "",
-  gameQueueConfigId: Long = 0,
-  gameStartTime: Long = 0,
-  gameType: String = "",
-  mapId: Long = 0,
-  observers: Option[Observer] = None,
-  participants: List[Participant] = Nil,
-  platformId: String = ""
+  bannedChampions: List[BannedChampion],
+  gameId: Long,
+  gameLength: Long,
+  gameMode: String,
+  gameQueueConfigId: Long,
+  gameStartTime: Long,
+  gameType: String,
+  mapId: Long,
+  observers: Option[Observer],
+  participants: List[Participant],
+  platformId: String
   )
 
 object CurrentGameInfo {

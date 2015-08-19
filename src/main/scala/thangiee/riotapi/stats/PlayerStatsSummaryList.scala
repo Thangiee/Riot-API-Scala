@@ -3,8 +3,8 @@ package thangiee.riotapi.stats
 import play.api.libs.json._
 
 case class PlayerStatsSummaryList(
-  playerStatSummaries: List[PlayerStatsSummary] = Nil,
-  summonerId: Long = 0
+  playerStatSummaries: List[PlayerStatsSummary],
+  summonerId: Long
   )
 
 object PlayerStatsSummaryList {

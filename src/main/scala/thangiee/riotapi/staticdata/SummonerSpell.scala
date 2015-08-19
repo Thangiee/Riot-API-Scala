@@ -3,11 +3,11 @@ package thangiee.riotapi.staticdata
 import play.api.libs.json._
 
 case class SummonerSpell(
-  name: String = "",
-  description: String = "",
-  summonerLevel: Int = 0,
-  id: Int = 0,
-  key: String = ""
+  name: String,
+  description: String,
+  summonerLevel: Int,
+  id: Int ,
+  key: String
   )
 
 object SummonerSpell {
