@@ -1,7 +1,8 @@
+package thangiee.riotapi
+
 import org.scalactic.Good
 import org.scalamock.scalatest.MockFactory
 import org.scalatest._
-import thangiee.riotapi.{ApiCaller, RiotApi}
 
 trait BaseSpec extends FlatSpec with Matchers with MockFactory {
   abstract class MockScope {

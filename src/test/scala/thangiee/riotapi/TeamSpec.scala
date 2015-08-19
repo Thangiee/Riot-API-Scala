@@ -1,4 +1,6 @@
-import thangiee.riotapi.RiotApi
+package thangiee.riotapi
+
+import thangiee.riotapi.BaseSpec
 
 class TeamSpec extends BaseSpec {
 

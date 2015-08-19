@@ -1,5 +1,6 @@
-import thangiee.riotapi._
-import thangiee.riotapi.summoner.Summoner
+package thangiee.riotapi
+
+import thangiee.riotapi.BaseSpec
 
 class RiotApiSpec extends BaseSpec {
 
@@ -11,9 +12,13 @@ class RiotApiSpec extends BaseSpec {
   }
 
   "Parsing json" should "replace missing json field with default value" in new MockScope {
-    def json: String = "{\"thangiee\":{\"id\":25011185,\"name\":\"Thangiee\",\"summonerLevel\":30,\"revisionDate\":1435215901000}}"
+    // removed page's name field
+    def json: String = "{\"58229565\":{\"summonerId\":58229565,\"pages\":[{\"id\":52480578,\"current\":true}]}}"
 
-    RiotApi.summonerByName("thangiee").map(_.profileIconId shouldBe Summoner().profileIconId)
+    RiotApi.masteryPagesByIds(List(58229565)).get.head match {
+      case (_, masteryPages) =>
+        masteryPages.pages.head.name shouldEqual ""
+    }
   }
 
 }
