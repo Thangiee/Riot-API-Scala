@@ -1,8 +1,8 @@
 name := "riot-api-scala"
 
-version := "0.3.0"
+version := "0.4.0"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.7"
 
 organization := "com.github.thangiee"
 
