@@ -88,28 +88,28 @@ object RiotApi {
   //    league api calls
   // =====================
 
-  def leagueByIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[League]] Or RiotError = {
+  def leagueByIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-summoner/${ids.mkString(",")}?api_key=$key"
-    jsonToMap[Long, List[League]](ids, ttl)
+    jsonToMap[Long, Seq[League]](ids, ttl)
   }
 
-  def leagueEntryByIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[League]] Or RiotError = {
+  def leagueEntryByIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-summoner/${ids.mkString(",")}/entry?api_key=$key"
-    jsonToMap[Long, List[League]](ids, ttl)
+    jsonToMap[Long, Seq[League]](ids, ttl)
   }
 
-  def leagueEntryById(id: Long, ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): List[League] Or RiotError = {
-    leagueEntryByIds(List(id), ttl, reg).map(_.getOrElse(id, Nil))
+  def leagueEntryById(id: Long, ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Seq[League] Or RiotError = {
+    leagueEntryByIds(Seq(id), ttl, reg).map(_.getOrElse(id, Nil))
   }
 
-  def leagueByTeamIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[League]] Or RiotError = {
+  def leagueByTeamIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-team/${ids.mkString(",")}?api_key=$key"
-    jsonToMap[Long, List[League]](ids, ttl)
+    jsonToMap[Long, Seq[League]](ids, ttl)
   }
 
-  def leagueEntryByTeamIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[League]] Or RiotError = {
+  def leagueEntryByTeamIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-team/${ids.mkString(",")}/entry?api_key=$key"
-    jsonToMap[Long, List[League]](ids, ttl)
+    jsonToMap[Long, Seq[League]](ids, ttl)
   }
 
   def challengerLeague(queue: QueueType, ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): League Or RiotError = {
@@ -140,7 +140,7 @@ object RiotApi {
   //  Summoner api calls
   // =====================
 
-  def summonerByNames(names: List[String], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[String, Summoner] Or RiotError = {
+  def summonerByNames(names: Seq[String], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[String, Summoner] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/by-name/${names.mkString(",")}?api_key=$key"
     jsonToMap[String, Summoner](names.map(_.toLowerCase), ttl)
   }
@@ -150,7 +150,7 @@ object RiotApi {
     jsonTo[String, Summoner](name.toLowerCase, ttl)
   }
 
-  def summonerByIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, Summoner] Or RiotError = {
+  def summonerByIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, Summoner] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/${ids.mkString(",")}?api_key=$key"
     jsonToMap[Long, Summoner](ids, ttl)
   }
@@ -160,7 +160,7 @@ object RiotApi {
     jsonTo[Long, Summoner](id, ttl)
   }
 
-  def masteryPagesByIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, MasteryPages] Or RiotError = {
+  def masteryPagesByIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, MasteryPages] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/${ids.mkString(",")}/masteries?api_key=$key"
     jsonToMap[Long, MasteryPages](ids, ttl)
   }
@@ -170,7 +170,7 @@ object RiotApi {
     jsonTo[Long, String](id, ttl)
   }
 
-  def runePagesByIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, RunePages] Or RiotError = {
+  def runePagesByIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, RunePages] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$summVer/summoner/${ids.mkString(",")}/runes?api_key=$key"
     jsonToMap[Long, RunePages](ids, ttl)
   }
@@ -179,12 +179,12 @@ object RiotApi {
   //    Team api calls
   // =====================
 
-  def teamBySummonerIds(ids: List[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, List[Team]] Or RiotError = {
+  def teamBySummonerIds(ids: Seq[Long], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[Long, Seq[Team]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$teamVer/team/by-summoner/${ids.mkString(",")}?api_key=$key"
-    jsonToMap[Long, List[Team]](ids, ttl)
+    jsonToMap[Long, Seq[Team]](ids, ttl)
   }
 
-  def teamByTeamIds(ids: List[String], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[String, Team] Or RiotError = {
+  def teamByTeamIds(ids: Seq[String], ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Map[String, Team] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$teamVer/team/${ids.mkString(",")}?api_key=$key"
     jsonToMap[String, Team](ids, ttl)
   }
@@ -224,7 +224,7 @@ object RiotApi {
 
   // =====================
 
-  private def jsonToMap[A, B: Manifest](keys: List[A], ttl: Duration)(implicit caller: ApiCaller, url: String): Map[A, B] Or RiotError = {
+  private def jsonToMap[A, B: Manifest](keys: Seq[A], ttl: Duration)(implicit caller: ApiCaller, url: String): Map[A, B] Or RiotError = {
     def asMap(jsonResponse: String) = {
       (for {
         key ← keys
