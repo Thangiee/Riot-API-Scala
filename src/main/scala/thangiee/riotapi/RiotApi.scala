@@ -1,7 +1,6 @@
 package thangiee.riotapi
 
 import org.scalactic.Or
-import play.api.libs.json._
 import thangiee.riotapi.`match`.MatchDetail
 import thangiee.riotapi.currentgame.CurrentGameInfo
 import thangiee.riotapi.game.RecentGames
@@ -12,6 +11,8 @@ import thangiee.riotapi.staticdata.{Champion, SummonerSpell}
 import thangiee.riotapi.stats.{PlayerStatsSummaryList, RankedStats}
 import thangiee.riotapi.summoner.{MasteryPages, RunePages, Summoner}
 import thangiee.riotapi.team.Team
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
 
 import scala.concurrent.duration._
 
@@ -21,6 +22,9 @@ import scala.concurrent.duration._
   * documentations of all api methods.
   */
 object RiotApi {
+
+  private implicit val jsonFormats = DefaultFormats
+
   private var _key = ""
   private var _reg = "na"
 
@@ -195,7 +199,8 @@ object RiotApi {
   }
 
   def spellStaticDataById(id: Int, ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): SummonerSpell Or RiotError = {
-    implicit val url = s"${baseUrl(reg)}/$staticDataVer/summoner-spell/$id?api_key=$key"
+//    implicit val url = s"${baseUrl(reg)}/$staticDataVer/summoner-spell/$id?api_key=$key"
+    implicit val url = s"https://global.api.pvp.net/api/lol/static-data/na/$staticDataVer/summoner-spell/$id?api_key=$key"
     jsonTo[SummonerSpell](ttl)
   }
 
@@ -220,21 +225,21 @@ object RiotApi {
 
   // =====================
 
-  private def jsonToMap[A, B: Reads](keys: List[A], ttl: Duration)(implicit caller: ApiCaller, url: String): Map[A, B] Or RiotError = {
+  private def jsonToMap[A, B: Manifest](keys: List[A], ttl: Duration)(implicit caller: ApiCaller, url: String): Map[A, B] Or RiotError = {
     def asMap(jsonResponse: String) = {
       (for {
         key ← keys
-        value ← (Json.parse(jsonResponse) \ key.toString).asOpt[B]
+        value ← (parse(jsonResponse) \ key.toString).extractOpt[B]
       } yield key → value).toMap
     }
 
     caller.call(url, ttl).map(asMap)
   }
 
-  private def jsonTo[A, B: Reads](key: A, ttl: Duration)(implicit caller: ApiCaller, url: String): B Or RiotError =
-    caller.call(url, ttl).map(json => (Json.parse(json) \ key.toString).as[B])
+  private def jsonTo[A, B: Manifest](key: A, ttl: Duration)(implicit caller: ApiCaller, url: String): B Or RiotError =
+    caller.call(url, ttl).map(json => (parse(json) \ key.toString).extract[B])
 
-  private def jsonTo[A: Reads](ttl: Duration)(implicit caller: ApiCaller, url: String): A Or RiotError =
-    caller.call(url, ttl).map(json => Json.parse(json).as[A])
+  private def jsonTo[A: Manifest](ttl: Duration)(implicit caller: ApiCaller, url: String): A Or RiotError =
+    caller.call(url, ttl).map(json => parse(json).extract[A])
 }
 
