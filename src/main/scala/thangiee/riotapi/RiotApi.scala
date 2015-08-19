@@ -194,12 +194,11 @@ object RiotApi {
   // =====================
 
   def champStaticDataById(id: Int, ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): Champion Or RiotError = {
-    implicit val url = s"${baseUrl(reg)}/$staticDataVer/champion/$id?&api_key=$key"
+    implicit val url = s"https://global.api.pvp.net/api/lol/static-data/na/$staticDataVer/champion/$id?api_key=$key"
     jsonTo[Champion](ttl)
   }
 
   def spellStaticDataById(id: Int, ttl: Duration = 20.minutes, reg: String = _reg)(implicit caller: ApiCaller): SummonerSpell Or RiotError = {
-//    implicit val url = s"${baseUrl(reg)}/$staticDataVer/summoner-spell/$id?api_key=$key"
     implicit val url = s"https://global.api.pvp.net/api/lol/static-data/na/$staticDataVer/summoner-spell/$id?api_key=$key"
     jsonTo[SummonerSpell](ttl)
   }
