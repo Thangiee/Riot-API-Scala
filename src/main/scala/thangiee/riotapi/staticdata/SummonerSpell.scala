@@ -1,7 +1,5 @@
 package thangiee.riotapi.staticdata
 
-import play.api.libs.json._
-
 case class SummonerSpell(
   name: String,
   description: String,
@@ -9,7 +7,3 @@ case class SummonerSpell(
   id: Int ,
   key: String
   )
-
-object SummonerSpell {
-  implicit val summonerSpellFmt = Json.reads[SummonerSpell]
-}

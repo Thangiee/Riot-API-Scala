@@ -1,7 +1,5 @@
 package thangiee.riotapi.`match`
 
-import play.api.libs.json.Json
-
 case class Event(
   ascendedType: String = "",
   assistingParticipantIds: List[Int] = Nil,
@@ -25,7 +23,3 @@ case class Event(
   victimId: Int = 0,
   wardType: String = ""
   )
-
-object Event {
-  implicit val eventFmt = Json.reads[Event]
-}

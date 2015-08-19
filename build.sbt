@@ -17,7 +17,6 @@ libraryDependencies ++= List(
   "org.scalatest" % "scalatest_2.11" % "2.2.5" % "test",
   "org.scalamock" %% "scalamock-scalatest-support" % "3.2.2" % "test",
   "org.scalactic" % "scalactic_2.11" % "2.2.5",
-  "com.typesafe.play" %% "play-json" % "2.4.0-M2",
   "com.github.cb372" %% "scalacache-guava" % "0.6.4",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0",
   "org.json4s" %% "json4s-native" % "3.2.11",

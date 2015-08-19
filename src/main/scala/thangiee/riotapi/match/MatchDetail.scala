@@ -1,7 +1,5 @@
 package thangiee.riotapi.`match`
 
-import play.api.libs.json.Json
-
 case class MatchDetail(
   mapId: Int,
   matchCreation: Long,
@@ -19,7 +17,3 @@ case class MatchDetail(
   teams: List[Team],
   timeline: Timeline
   )
-
-object MatchDetail {
-  implicit val matchDetailFmt = Json.reads[MatchDetail]
-}

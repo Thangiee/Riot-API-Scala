@@ -1,7 +1,5 @@
 package thangiee.riotapi.currentgame
 
-import play.api.libs.json._
-
 case class Participant(
   bot: Boolean = false,
   championId: Long = 0,
@@ -14,7 +12,3 @@ case class Participant(
   summonerName: String = "",
   teamId: Long = 0
   )
-
-object Participant {
-  implicit val participantFmt = Json.reads[Participant]
-}

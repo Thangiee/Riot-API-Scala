@@ -1,7 +1,5 @@
 package thangiee.riotapi.league
 
-import play.api.libs.json._
-
 case class LeagueEntry(
   division: String = "",
   isFreshBlood: Boolean = false,
@@ -14,7 +12,3 @@ case class LeagueEntry(
   playerOrTeamName: String = "",
   wins: Int = 0
   )
-
-object LeagueEntry {
-  implicit val leagueEntryFmt = Json.reads[LeagueEntry]
-}

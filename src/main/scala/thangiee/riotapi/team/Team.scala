@@ -1,7 +1,5 @@
 package thangiee.riotapi.team
 
-import play.api.libs.json._
-
 case class Team(
   createDate: Long,
   fullId: String,
@@ -18,7 +16,3 @@ case class Team(
   teamStatDetails: List[TeamStatDetail],
   thirdLastJoinDate: Long
   )
-
-object Team {
-  implicit val teamFmt = Json.reads[Team]
-}

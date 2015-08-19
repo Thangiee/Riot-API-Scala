@@ -1,0 +1,31 @@
+package thangiee.riotapi.matchhistory
+
+case class ParticipantTimeline(
+   ancientGolemAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   ancientGolemKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   assistedLaneDeathsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   assistedLaneKillsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   baronAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   baronKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   creepsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   csDiffPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   damageTakenDiffPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   damageTakenPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   dragonAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   dragonKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   elderLizardAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   elderLizardKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   goldPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   inhibitorAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   inhibitorKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   lane: String = "",
+   role: String = "",
+   towerAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   towerKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   towerKillsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   vilemawAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   vilemawKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+   wardsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   xpDiffPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+   xpPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData()
+   )

@@ -1,7 +1,5 @@
 package thangiee.riotapi.matchhistory
 
-import play.api.libs.json.Json
-
 case class Player(
   matchHistoryUri: String = "",
   profileIcon: Int = 0,
@@ -9,6 +7,3 @@ case class Player(
   summonerName: String = ""
   )
 
-object Player {
-  implicit val playerFmt = Json.reads[Player]
-}

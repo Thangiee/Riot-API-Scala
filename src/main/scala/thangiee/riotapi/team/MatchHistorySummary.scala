@@ -1,7 +1,5 @@
 package thangiee.riotapi.team
 
-import play.api.libs.json._
-
 case class MatchHistorySummary(
   assists: Int = 0,
   date: Long = 0,
@@ -15,7 +13,3 @@ case class MatchHistorySummary(
   opposingTeamName: String = "",
   win: Boolean = false
   )
-
-object MatchHistorySummary {
-  implicit val matchHistorySummaryFmt = Json.reads[MatchHistorySummary]
-}

@@ -1,9 +1,6 @@
-package thangiee.riotapi.`match`.participanttimeline
+package thangiee.riotapi.`match`
 
-import play.api.libs.json.Json
-import thangiee.riotapi.matchhistory.ParticipantTimelineData
-
-case class Data1(
+case class ParticipantTimeline(
   ancientGolemAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
   ancientGolemKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
   assistedLaneDeathsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
@@ -25,9 +22,10 @@ case class Data1(
   role: String = "",
   towerAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
   towerKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
-  towerKillsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData()
+  towerKillsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+  vilemawAssistsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+  vilemawKillsPerMinCounts: ParticipantTimelineData = ParticipantTimelineData(),
+  wardsPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+  xpDiffPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData(),
+  xpPerMinDeltas: ParticipantTimelineData = ParticipantTimelineData()
   )
-
-object Data1 {
-  implicit val data1Fmt = Json.reads[Data1]
-}

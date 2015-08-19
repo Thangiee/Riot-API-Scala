@@ -1,9 +1,5 @@
 package thangiee.riotapi.`match`
 
-import play.api.libs.json.Json
-import thangiee.riotapi.matchhistory.participantstats.ParticipantStats
-import thangiee.riotapi.matchhistory.participanttimeline.ParticipantTimeline
-
 case class Participant(
   championId: Int = 0,
   highestAchievedSeasonTier: String = "",
@@ -16,7 +12,3 @@ case class Participant(
   teamId: Int = 0,
   timeline: ParticipantTimeline = ParticipantTimeline()
   )
-
-object Participant {
-  implicit val participantFmt = Json.reads[Participant]
-}

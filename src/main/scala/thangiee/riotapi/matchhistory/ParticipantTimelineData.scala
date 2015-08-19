@@ -1,7 +1,5 @@
 package thangiee.riotapi.matchhistory
 
-import play.api.libs.json.Json
-
 case class ParticipantTimelineData(
   tenToTwenty: Double = 0,
   thirtyToEnd: Double = 0,
@@ -9,6 +7,3 @@ case class ParticipantTimelineData(
   zeroToTen: Double = 0
   )
 
-object ParticipantTimelineData {
-  implicit val participantTimelineDataFmt = Json.reads[ParticipantTimelineData]
-}

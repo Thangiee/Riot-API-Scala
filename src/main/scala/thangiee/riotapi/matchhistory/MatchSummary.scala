@@ -1,7 +1,5 @@
 package thangiee.riotapi.matchhistory
 
-import play.api.libs.json.Json
-
 case class MatchSummary(
   mapId: Int = 0,
   matchCreation: Long = 0,
@@ -18,6 +16,3 @@ case class MatchSummary(
   season: String = ""
   )
 
-object MatchSummary {
-  implicit val matchSummaryFmt = Json.reads[MatchSummary]
-}

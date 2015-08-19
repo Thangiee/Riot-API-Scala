@@ -1,8 +1,5 @@
 package thangiee.riotapi.game
 
-import play.api.libs.json._
-import thangiee.riotapi.game.rawstats.RawStats
-
 case class Game(
   championId: Int = 0,
   createDate: Long = 0,
@@ -20,7 +17,3 @@ case class Game(
   subType: String = "",
   teamId: Int = 0
   )
-
-object Game {
-  implicit val gameFmt = Json.reads[Game]
-}

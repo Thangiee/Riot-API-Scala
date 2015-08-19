@@ -1,7 +1,5 @@
 package thangiee.riotapi.`match`
 
-import play.api.libs.json.Json
-
 case class Team(
   bans: List[BannedChampion] = Nil,
   baronKills: Int = 0,
@@ -18,7 +16,3 @@ case class Team(
   vilemawKills: Int = 0,
   winner: Boolean = false
   )
-
-object Team {
-  implicit val teamFmt = Json.reads[Team]
-}
