@@ -5,14 +5,14 @@ import scala.concurrent.duration.{TimeUnit, Duration, FiniteDuration, DurationCo
 package object riotapi {
   type JsonString = String
 
-  sealed trait RiotError
-  case class BadRequest(url: String) extends RiotError
-  case class Unauthorized(key: String) extends RiotError
-  case class RateLimit(key: String) extends RiotError
-  object DataNotFound extends RiotError
-  object ServerError extends RiotError
-  object ServiceUnavailable extends RiotError
-  object TimeOut extends RiotError
+  sealed trait RiotError { def code: Int }
+  case class BadRequest(url: String)    extends RiotError { def code: Int = 400 }
+  case class Unauthorized(key: String)  extends RiotError { def code: Int = 401 }
+  case class RateLimit(key: String)     extends RiotError { def code: Int = 429 }
+  object DataNotFound                   extends RiotError { def code: Int = 404 }
+  object ServerError                    extends RiotError { def code: Int = 500 }
+  object ServiceUnavailable             extends RiotError { def code: Int = 503 }
+  object TimeOut                        extends RiotError { def code: Int = 408 }
 
   sealed trait QueueType { def `type`: String }
   object RankedSolo5v5 extends QueueType { def `type`: String = "RANKED_SOLO_5x5" }
