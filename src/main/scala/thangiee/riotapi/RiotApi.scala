@@ -1,6 +1,6 @@
 package thangiee.riotapi
 
-import org.scalactic.Or
+import org.scalactic.{Good, Bad, Or}
 import thangiee.riotapi.`match`.MatchDetail
 import thangiee.riotapi.currentgame.CurrentGameInfo
 import thangiee.riotapi.game.RecentGames
@@ -93,24 +93,32 @@ object RiotApi {
     jsonToMap[Long, Seq[League]](ids, ttl)
   }
 
+  def leagueById(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[League] Or RiotError =
+    leagueByIds(Seq(id), reg, ttl).map(_.getOrElse(id, Nil))
+
   def leagueEntryByIds(ids: Seq[Long], reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-summoner/${ids.mkString(",")}/entry?api_key=$key"
     jsonToMap[Long, Seq[League]](ids, ttl)
   }
 
-  def leagueEntryById(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[League] Or RiotError = {
+  def leagueEntryById(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[League] Or RiotError =
     leagueEntryByIds(Seq(id), reg, ttl).map(_.getOrElse(id, Nil))
-  }
 
   def leagueByTeamIds(ids: Seq[Long], reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-team/${ids.mkString(",")}?api_key=$key"
     jsonToMap[Long, Seq[League]](ids, ttl)
   }
 
+  def leagueByTeamId(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[League] Or RiotError =
+    leagueByTeamIds(Seq(id), reg, ttl).map(_.getOrElse(id, Nil))
+
   def leagueEntryByTeamIds(ids: Seq[Long], reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-team/${ids.mkString(",")}/entry?api_key=$key"
     jsonToMap[Long, Seq[League]](ids, ttl)
   }
+
+  def leagueEntryByTeamId(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[League] Or RiotError =
+    leagueEntryByTeamIds(Seq(id), reg, ttl).map(_.getOrElse(id, Nil))
 
   def challengerLeague(queue: QueueType, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): League Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/challenger?type=${queue.`type`}&api_key=$key"
@@ -184,10 +192,16 @@ object RiotApi {
     jsonToMap[Long, Seq[Team]](ids, ttl)
   }
 
-  def teamByTeamIds(ids: Seq[String], reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Map[String, Team] Or RiotError = {
-    implicit val url = s"${baseUrl(reg)}/$teamVer/team/${ids.mkString(",")}?api_key=$key"
-    jsonToMap[String, Team](ids, ttl)
+  def teamBySummonerId(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[Team] Or RiotError =
+    teamBySummonerIds(Seq(id), reg, ttl).map(_.getOrElse(id, Nil))
+
+  def teamByTeamIds(fullIds: Seq[String], reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Map[String, Team] Or RiotError = {
+    implicit val url = s"${baseUrl(reg)}/$teamVer/team/${fullIds.mkString(",")}?api_key=$key"
+    jsonToMap[String, Team](fullIds, ttl)
   }
+
+  def teamByTeamId(fullId: String, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Team Or RiotError =
+    teamByTeamIds(Seq(fullId), reg, ttl).map(m => if (m.isEmpty) return Bad(DataNotFound) else m.values.head)
 
   // =====================
   // Static-data api calls
