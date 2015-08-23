@@ -96,9 +96,9 @@ object RiotApi {
   def leagueById(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[League] Or RiotError =
     leagueByIds(Seq(id), reg, ttl).map(_.getOrElse(id, Nil))
 
-  def leagueEntryByIds(ids: Seq[Long], reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Map[Long, Seq[League]] Or RiotError = {
+  def leagueEntryByIds(ids: Seq[Long], reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Map[Long, List[League]] Or RiotError = {
     implicit val url = s"${baseUrl(reg)}/$leagueVer/league/by-summoner/${ids.mkString(",")}/entry?api_key=$key"
-    jsonToMap[Long, Seq[League]](ids, ttl)
+    jsonToMap[Long, List[League]](ids, ttl)
   }
 
   def leagueEntryById(id: Long, reg: String = _reg, ttl: Duration = 20.minutes)(implicit caller: ApiCaller): Seq[League] Or RiotError =
