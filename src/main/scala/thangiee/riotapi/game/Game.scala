@@ -13,7 +13,7 @@ case class Game(
   mapId: Int = 0,
   spell1: Int = 0,
   spell2: Int = 0,
-  stats: Option[RawStats] = None,
+  stats: RawStats = RawStats(),
   subType: String = "",
   teamId: Int = 0
   )
