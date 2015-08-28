@@ -1,7 +1,7 @@
 package thangiee.riotapi
 
 import org.scalactic.{Good, Bad, Or}
-import thangiee.riotapi.`match`.MatchDetail
+import thangiee.riotapi.matches.MatchDetail
 import thangiee.riotapi.currentgame.CurrentGameInfo
 import thangiee.riotapi.game.RecentGames
 import thangiee.riotapi.league.League

@@ -1,4 +1,4 @@
-package thangiee.riotapi.`match`
+package thangiee.riotapi.matches
 
 case class MatchDetail(
   mapId: Int,
